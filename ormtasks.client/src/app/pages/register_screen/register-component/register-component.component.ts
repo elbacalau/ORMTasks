@@ -1,4 +1,4 @@
-import { CreateAccountService } from '../../../services/user_services/create_acount_service/user.service';
+import { AuthService } from './../../../services/user_services/create_acount_service/user.service';
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ export class RegisterComponent {
 
 
   constructor(
-    private CreateAccountService: CreateAccountService,
+    private authService: AuthService,
     private router: Router,
   ) { }
 
@@ -42,7 +42,7 @@ export class RegisterComponent {
     if (this.registerForm().valid) {
       this.isLoading.set(true);
 
-      this.CreateAccountService.createUser(this.registerForm())
+      this.authService.createUser(this.registerForm())
         .subscribe({
           next: response => {
             console.log('Usuario creado:', response);
