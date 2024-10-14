@@ -21,5 +21,8 @@ namespace ORM.Models
         public required string Poblacion { get; set; }
 
         public required string NumeroTelefono { get; set; }
+
+        
+
     }
 }

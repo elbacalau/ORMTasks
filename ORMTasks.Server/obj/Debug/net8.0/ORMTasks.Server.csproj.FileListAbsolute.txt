@@ -139,3 +139,4 @@ C:\Users\Drify\Desktop\ORMTask\ORMTasks\ORMTasks.Server\bin\Debug\net8.0\Microso
 C:\Users\Drify\Desktop\ORMTask\ORMTasks\ORMTasks.Server\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Drify\Desktop\ORMTask\ORMTasks\ORMTasks.Server\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Drify\Desktop\ORMTask\ORMTasks\ORMTasks.Server\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Drify\Desktop\ORMTask\ORMTasks\ORMTasks.Server\obj\Debug\net8.0\ORMTasks.Server.sourcelink.json
