@@ -20,7 +20,7 @@ export class AuthService {
       delay(2000),
       catchError((error) => {
         console.error("Error al crear el usuario:", error);
-        return throwError(error);
+        return throwError(() => error);
       })
       );
   }
@@ -34,7 +34,7 @@ export class AuthService {
       }),
       catchError((error) => {
         console.error("Error en el login", error);
-        return throwError(error);
+        return throwError(() => error);
 
       })
     )

@@ -47,13 +47,31 @@ namespace ORM.Services
         public async Task<Usuario?> Login(string email, string contrasena)
         {
             var usuario = await _context.Usuarios.SingleOrDefaultAsync(u => u.Email == email);
-            if (usuario == null || !BCrypt.Net.BCrypt.Verify(contrasena, usuario.Contrasena))
+
+            if (usuario == null)
             {
+                // Usuario no encontrado, retorna null
+                return null;
+            }
+
+            // Imprimir para depuración
+            Console.WriteLine($"Contraseña ingresada: {contrasena}");
+            Console.WriteLine($"Hash almacenado: {usuario.Contrasena}");
+
+            var password = "test"; // la contraseña que quieres verificar
+            var hash = BCrypt.Net.BCrypt.HashPassword(password);
+            Console.WriteLine($"Hash generado: {hash}");
+
+
+            if (!BCrypt.Net.BCrypt.Verify(contrasena, usuario.Contrasena))
+            {
+                // La contraseña no coincide
                 return null;
             }
 
             return usuario;
         }
+
 
         public async Task<bool> EliminarTodosUsuarios()
         {

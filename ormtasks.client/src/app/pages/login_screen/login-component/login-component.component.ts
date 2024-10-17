@@ -40,7 +40,7 @@ export class LoginComponentComponent {
     this.authService.login(this.loginForm())
     .subscribe({
       next: (token) => {
-        // TODO: login correcto
+
         // '/dashboard'
         this.router.navigate(['/dashboard']);
         console.log(token);

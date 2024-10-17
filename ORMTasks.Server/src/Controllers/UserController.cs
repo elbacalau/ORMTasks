@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ORM.Models;
 using ORM.Services;
+using ORMTasks.DTO;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -26,17 +27,26 @@ namespace ORM.Controllers
         }
 
         [HttpPost("login")]
+
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            var usuario = await _userService.Login(request.Email, request.Contrasena);
-            if (usuario == null)
+            try
             {
-                return Unauthorized(new { error = "Email o contraseña incorrectos" });
-            }
+                var usuario = await _userService.Login(request.Email, request.Contrasena);
+                if (usuario == null)
+                {
+                    return Unauthorized(new { error = "Email o contraseña incorrectos" });
+                }
 
-            var token = GenerateJwtToken(usuario);
-            return Ok(new { token });
+                var token = GenerateJwtToken(usuario);
+                return Ok(new { token });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
         }
+
 
         private string GenerateJwtToken(Usuario usuario)
         {
@@ -63,12 +73,30 @@ namespace ORM.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UsuarioDto>>> GetUsers()
         {
-            return await _context.Usuarios.ToListAsync();
+            var usuarios = await _context.Usuarios
+                .Select(u => new UsuarioDto
+                {
+                    Id = u.Id,
+                    Nombre = u.Nombre,
+                    Apellido = u.Apellido,
+                    SegundoApellido = u.SegundoApellido,
+                    Email = u.Email,
+                    FechaRegistro = u.FechaRegistro,
+                    FechaNacimiento = u.FechaNacimiento,
+                    Ciudad = u.Ciudad,
+                    Poblacion = u.Poblacion,
+                    NumeroTelefono = u.NumeroTelefono
+                    
+                })
+                .ToListAsync();
+
+            return Ok(usuarios);
         }
 
-        
+
+        // crear usuario
         [HttpPost("crear")]
         public IActionResult CrearUsuario([FromBody] CrearUsuarioRequest request)
         {
@@ -82,8 +110,8 @@ namespace ORM.Controllers
                 var nuevoUsuario = _userService.CrearUsuario(
                     request.Nombre,
                     request.Apellido,
-                    request.SegundoApellido,  
-                    request.Contrasena, 
+                    request.SegundoApellido,
+                    request.Contrasena,
                     request.FechaNacimiento,
                     request.Email,
                     request.Ciudad,
@@ -111,6 +139,7 @@ namespace ORM.Controllers
 
             return NoContent();
         }
+
 
         [Authorize]
         [HttpDelete("eliminarUsuarios")]
