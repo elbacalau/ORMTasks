@@ -9,8 +9,9 @@ public class ORMDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Usuario>().ToTable("usuarios");
+        modelBuilder.Entity<Tablero>().ToTable("Tableros");
     }
 
     public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Tablero> Tableros { get; set; }
 }

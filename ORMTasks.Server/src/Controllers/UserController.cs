@@ -13,18 +13,11 @@ namespace ORM.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController(ORMDbContext context, UserService userService, IConfiguration configuration) : ControllerBase
     {
-        private readonly ORMDbContext _context;
-        private readonly UserService _userService;
-        private readonly IConfiguration _configuration;
-
-        public UsersController(ORMDbContext context, UserService userService, IConfiguration configuration)
-        {
-            _context = context;
-            _userService = userService;
-            _configuration = configuration;
-        }
+        private readonly ORMDbContext _context = context;
+        private readonly UserService _userService = userService;
+        private readonly IConfiguration _configuration = configuration;
 
         [HttpPost("login")]
 

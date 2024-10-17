@@ -22,6 +22,8 @@ namespace ORM.Models
 
         public required string NumeroTelefono { get; set; }
 
+        public ICollection<Tablero>? Tableros { get; set; }
+
         
 
     }
