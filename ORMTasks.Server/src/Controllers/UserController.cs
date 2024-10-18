@@ -48,10 +48,10 @@ namespace ORM.Controllers
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, usuario.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString())
-            };
+        new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()), 
+        new Claim(ClaimTypes.Email, usuario.Email),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+    };
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
@@ -63,6 +63,7 @@ namespace ORM.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
 
         [Authorize]
         [HttpGet]
@@ -81,7 +82,7 @@ namespace ORM.Controllers
                     Ciudad = u.Ciudad,
                     Poblacion = u.Poblacion,
                     NumeroTelefono = u.NumeroTelefono
-                    
+
                 })
                 .ToListAsync();
 
@@ -142,6 +143,9 @@ namespace ORM.Controllers
                 ? NoContent()
                 : NotFound(new { error = "No hay usuarios" });
         }
+
+
+        
 
         public class CrearUsuarioRequest
         {

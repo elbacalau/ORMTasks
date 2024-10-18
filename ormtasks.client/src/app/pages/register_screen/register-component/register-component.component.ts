@@ -1,4 +1,4 @@
-import { AuthService } from '../../../services/user_services/create_acount_service/auth.service';
+import { AuthService } from '../../../services/user_services/auth.service';
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';

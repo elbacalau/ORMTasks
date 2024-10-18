@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Tablero } from 'src/app/interfaces/tablero.interface';
+import { TableroService } from './../../services/tablero_service/tablero.service';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,6 +9,33 @@ import { Component } from '@angular/core';
   templateUrl: './sidebar.component.html',
 
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
+
+  constructor(private tableroService: TableroService) { }
+
+  ngOnInit(): void {
+    this.getTableros();
+  }
+
+  listaTableros: Tablero[] = [];
+  errorMessage: WritableSignal<string> = signal("");
+
+  getTableros(): void {
+    this.tableroService.getTableros()
+    .subscribe({
+      next: (data: Tablero[]) => {
+
+        if (this.listaTableros.length === 0) {
+          this.errorMessage.set("No tienes ningun tablero")
+        }
+
+        this.listaTableros = data;
+        console.log(data);
+
+      },
+      error: (err) => this.errorMessage.set(err),
+    });
+  }
+
 
 }

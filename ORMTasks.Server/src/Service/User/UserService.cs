@@ -50,22 +50,20 @@ namespace ORM.Services
 
             if (usuario == null)
             {
-                // Usuario no encontrado, retorna null
+                
                 return null;
             }
 
-            // Imprimir para depuración
-            Console.WriteLine($"Contraseña ingresada: {contrasena}");
-            Console.WriteLine($"Hash almacenado: {usuario.Contrasena}");
+            
 
-            var password = "test"; // la contraseña que quieres verificar
+            var password = "test";
             var hash = BCrypt.Net.BCrypt.HashPassword(password);
             Console.WriteLine($"Hash generado: {hash}");
 
 
             if (!BCrypt.Net.BCrypt.Verify(contrasena, usuario.Contrasena))
             {
-                // La contraseña no coincide
+                
                 return null;
             }
 

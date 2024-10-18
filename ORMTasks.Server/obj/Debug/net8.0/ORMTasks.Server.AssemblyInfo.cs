@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ORMTasks.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+112e65e640230693a59744ac3f3d46a2c3ae8839")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5de462fa6eceba21fae41dc47d63f3b9c334519d")]
 [assembly: System.Reflection.AssemblyProductAttribute("ORMTasks.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ORMTasks.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

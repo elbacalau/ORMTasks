@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
 using ORM.Models;
-using ORM.Services;
-
+using ORM.Services; // Asegúrate de que la ruta sea correcta
+using ORMTasks.Server; // Asegúrate de incluir el espacio de nombres para TablerService
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +26,8 @@ builder.Services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
 // Registrar UserService
 builder.Services.AddScoped<UserService>();
 
+// Registrar TablerService
+builder.Services.AddScoped<TablerService>(); // Asegúrate de añadir esta línea
 
 builder.Services.AddAuthentication(options => 
 {

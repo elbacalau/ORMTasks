@@ -9,7 +9,14 @@ public class ORMDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Tablero>().ToTable("Tableros");
+        modelBuilder.Entity<Tablero>()
+            .ToTable("Tableros")
+            .HasOne(t => t.Usuario)
+            .WithMany(u => u.Tableros)
+            .HasForeignKey(t => t.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Usuario>().ToTable("Usuarios");
     }
 
     public DbSet<Usuario> Usuarios { get; set; }

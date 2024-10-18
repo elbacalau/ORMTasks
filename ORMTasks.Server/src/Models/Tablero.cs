@@ -8,14 +8,15 @@ namespace ORM.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        
+
         [MaxLength(25)]
         public required string Titulo { get; set; }
 
         public required string Descripcion { get; set; }
-        public int UserId {get; set;}
+
+        public int UserId { get; set; } // Clave foránea hacia Usuario
 
         [ForeignKey("UserId")]
-        public Usuario? Usuario {get; set;}
+        public Usuario? Usuario { get; set; } // Relación de navegación
     }
 }

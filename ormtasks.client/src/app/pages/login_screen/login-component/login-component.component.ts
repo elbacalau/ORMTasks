@@ -1,5 +1,5 @@
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from './../../../services/user_services/create_acount_service/auth.service';
+import { AuthService } from '../../../services/user_services/auth.service';
 import { Component, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { throwError } from 'rxjs';
@@ -12,8 +12,6 @@ import { throwError } from 'rxjs';
 
 })
 export class LoginComponentComponent {
-
-
 
   constructor(
     private authService: AuthService,
