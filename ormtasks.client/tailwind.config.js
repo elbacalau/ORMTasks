@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
       },
+      backgroundColor: {
+        'custom-dark': '#11002E',
+      }
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],

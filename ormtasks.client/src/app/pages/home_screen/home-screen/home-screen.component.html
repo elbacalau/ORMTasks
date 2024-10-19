@@ -1,34 +1,22 @@
-<div class="container">
-  <!-- Sidebar con ancho fijo -->
-  <app-sidebar class="sidebar"></app-sidebar>
+<nav class="bg-custom-dark bg-opacity-50 p-4 fixed w-full z-50 shadow-lg">
+  <div class="container mx-auto flex justify-center items-center">
+    <ul class="flex space-x-8 text-white font-semibold text-xl">
+      <li class="transition-transform duration-200 hover:scale-110"><a href="#" class="hover:text-blue-100">Quienes Somos</a></li>
+      <li class="transition-transform duration-200 hover:scale-110"><a href="#" class="hover:text-gray-300">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <div class="content">
-    <!-- SVG como fondo -->
-    <div class="svg-background">
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-           xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 800">
-        <defs>
-          <filter id="bbblurry-filter" x="-100%" y="-100%" width="400%" height="400%" filterUnits="objectBoundingBox"
-                  primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feGaussianBlur stdDeviation="108" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" edgeMode="none"
-                            result="blur"></feGaussianBlur>
-          </filter>
-        </defs>
-        <g filter="url(#bbblurry-filter)">
-          <ellipse rx="150" ry="150" cx="393.2859802246094" cy="249.92539978027344" fill="hsl(316, 73%, 52%)"></ellipse>
-        </g>
-      </svg>
-    </div>
 
-    <div class="flex-column">
-      <h1 class="main-title">Bienvenido! 👋🏼</h1>
-      <h3 class="sub-title">Nuestro objetivo es facilitar el trabajo en equipo.</h3>
-    </div>
+<div class="bg-custom-dark h-screen flex flex-col items-center justify-center relative">
+  <img src="../../../../assets/bbblurry.svg" alt="icon" width="600" height="300" class="absolute z-[1]">
 
-    <!-- Aquí cargamos el dashboard debajo del h1 -->
-    <div class="dashboard-container">
-      <app-dashboard></app-dashboard>
-    </div>
+  <h1 class="relative z-10 text-white text-9xl font-montserrat font-bold">ORM Task</h1>
+  <h4 class="relative z-10 text-white text-lg font-montserrat font-medium">Trabajar en equipo es más fácil que nunca.</h4>
+
+
+  <div class="relative z-10 mt-12">
+    <button class="btn btn-primary cursor-pointer text-white text-xl">Pulsa para empezar!</button>
+    <button class="btn btn-outline cursor-pointer text-white text-xl ml-5">Inicia Sesion</button>
   </div>
 </div>
-<router-outlet></router-outlet>
