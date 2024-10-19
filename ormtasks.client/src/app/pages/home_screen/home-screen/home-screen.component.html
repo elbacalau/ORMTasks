@@ -1,22 +1,13 @@
-<nav class="bg-custom-dark bg-opacity-50 p-4 fixed w-full z-50 shadow-lg">
-  <div class="container mx-auto flex justify-center items-center">
-    <ul class="flex space-x-8 text-white font-semibold text-xl">
-      <li class="transition-transform duration-200 hover:scale-110"><a href="#" class="hover:text-blue-100">Quienes Somos</a></li>
-      <li class="transition-transform duration-200 hover:scale-110"><a href="#" class="hover:text-gray-300">Contact Us</a></li>
-    </ul>
-  </div>
-</nav>
+<app-navbar></app-navbar>
+<div class="bg-custom-dark h-screen flex flex-col items-center justify-center relative ">
+  <img src="../../../../assets/bbblurry.svg" alt="icon" class="absolute z-[1] w-full h-auto max-w-[600px] object-contain" />
 
+  <h1 class="relative z-10 text-white text-6xl sm:text-9xl font-montserrat font-bold text-center">ORM Task</h1>
+  <h4 class="relative z-10 text-white text-lg font-montserrat font-medium text-center px-4">Trabajar en equipo es más fácil que nunca.</h4>
 
-<div class="bg-custom-dark h-screen flex flex-col items-center justify-center relative">
-  <img src="../../../../assets/bbblurry.svg" alt="icon" width="600" height="300" class="absolute z-[1]">
-
-  <h1 class="relative z-10 text-white text-9xl font-montserrat font-bold">ORM Task</h1>
-  <h4 class="relative z-10 text-white text-lg font-montserrat font-medium">Trabajar en equipo es más fácil que nunca.</h4>
-
-
-  <div class="relative z-10 mt-12">
-    <button class="btn btn-primary cursor-pointer text-white text-xl">Pulsa para empezar!</button>
-    <button class="btn btn-outline cursor-pointer text-white text-xl ml-5">Inicia Sesion</button>
+  <div class="relative z-10 mt-12 flex flex-col sm:flex-row items-center">
+    <button class="btn btn-primary cursor-pointer text-white text-xl mb-4 sm:mb-0">Pulsa para empezar!</button>
+    <button routerLink="/login" routerLinkActive="activate" class="btn btn-outline cursor-pointer text-white text-xl ml-0 sm:ml-5">Inicia Sesión</button>
   </div>
 </div>
+<router-outlet></router-outlet>

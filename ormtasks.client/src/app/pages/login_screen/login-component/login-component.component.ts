@@ -1,14 +1,14 @@
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/user_services/auth.service';
 import { Component, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { throwError } from 'rxjs';
+import { NavbarComponent } from "../../components/navbar/navbar/navbar.component";
 
 @Component({
   selector: 'app-login-component',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule],
-  templateUrl: './login-component.component.html',
+  imports: [RouterModule, ReactiveFormsModule, NavbarComponent, NavbarComponent],
+  templateUrl: './login.component.html',
 
 })
 export class LoginComponentComponent {
