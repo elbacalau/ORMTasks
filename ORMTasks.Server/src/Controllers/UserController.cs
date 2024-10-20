@@ -18,7 +18,7 @@ namespace ORM.Controllers
         private readonly ORMDbContext _context = context;
         private readonly UserService _userService = userService;
         private readonly IConfiguration _configuration = configuration;
-
+        
         [HttpPost("login")]
 
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
