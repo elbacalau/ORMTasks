@@ -57,5 +57,10 @@ export class LoginComponentComponent {
    }
 
 
+   validateFields(): boolean {
+    return this.loginForm().invalid ? true : false;
+   }
+
+
 
 }
