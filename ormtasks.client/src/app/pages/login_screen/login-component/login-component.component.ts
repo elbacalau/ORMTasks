@@ -46,7 +46,8 @@ export class LoginComponentComponent {
       },
       error: (error) => {
         console.error("Error en el login", error);
-        this.errorMessage.set("Error al crear el usuario")
+        this.errorMessage.set("Contraseña o usuario incorrecto")
+        this.isLoading.set(false);
       },
       complete: () => {
         console.log("Proceso completado");
