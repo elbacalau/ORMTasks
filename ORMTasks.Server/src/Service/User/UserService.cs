@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ORM.Models;
+using ORMTasks.DTO;
 using System.Threading.Tasks;
 
 namespace ORM.Services
@@ -50,11 +51,11 @@ namespace ORM.Services
 
             if (usuario == null)
             {
-                
+
                 return null;
             }
 
-            
+
 
             var password = "test";
             var hash = BCrypt.Net.BCrypt.HashPassword(password);
@@ -63,7 +64,7 @@ namespace ORM.Services
 
             if (!BCrypt.Net.BCrypt.Verify(contrasena, usuario.Contrasena))
             {
-                
+
                 return null;
             }
 
@@ -98,5 +99,28 @@ namespace ORM.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<UsuarioDto?> GetUserByIdAsnyc(int userId) // Cambia el tipo aquí
+        {
+            var user = await _context.Usuarios.FindAsync(userId); // Aquí está bien, porque userId es un int
+            if (user == null) return null;
+
+            return new UsuarioDto
+            {
+                Id = user.Id,
+                Nombre = user.Nombre,
+                Apellido = user.Apellido,
+                SegundoApellido = user.SegundoApellido,
+                Email = user.Email,
+                FechaRegistro = user.FechaRegistro,
+                FechaNacimiento = user.FechaNacimiento,
+                Ciudad = user.Ciudad,
+                Poblacion = user.Poblacion,
+                NumeroTelefono = user.NumeroTelefono
+            };
+        }
+
+
+
     }
 }

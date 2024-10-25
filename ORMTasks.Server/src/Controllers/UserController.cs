@@ -18,7 +18,7 @@ namespace ORM.Controllers
         private readonly ORMDbContext _context = context;
         private readonly UserService _userService = userService;
         private readonly IConfiguration _configuration = configuration;
-        
+
         [HttpPost("login")]
 
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
@@ -48,7 +48,7 @@ namespace ORM.Controllers
 
             var claims = new[]
             {
-        new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()), 
+        new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
         new Claim(ClaimTypes.Email, usuario.Email),
         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
     };
@@ -145,7 +145,30 @@ namespace ORM.Controllers
         }
 
 
-        
+        [Authorize]
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetUserProfile()
+        {
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out int userId))
+            {
+                return Unauthorized();
+            }
+
+            var userDto = await _userService.GetUserByIdAsnyc(userId); // Cambia el tipo aquí
+
+            if (userDto == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(userDto);
+        }
+
+
+
+
 
         public class CrearUsuarioRequest
         {
