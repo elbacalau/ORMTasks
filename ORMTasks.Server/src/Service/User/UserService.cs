@@ -100,9 +100,12 @@ namespace ORM.Services
             return true;
         }
 
-        public async Task<UsuarioDto?> GetUserByIdAsnyc(int userId) // Cambia el tipo aquí
+        public async Task<UsuarioDto?> GetUserByIdAsnyc(int userId) 
         {
-            var user = await _context.Usuarios.FindAsync(userId); // Aquí está bien, porque userId es un int
+            var user = await _context.Usuarios
+                .Include(u => u.Tableros)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
             if (user == null) return null;
 
             return new UsuarioDto
@@ -116,7 +119,13 @@ namespace ORM.Services
                 FechaNacimiento = user.FechaNacimiento,
                 Ciudad = user.Ciudad,
                 Poblacion = user.Poblacion,
-                NumeroTelefono = user.NumeroTelefono
+                NumeroTelefono = user.NumeroTelefono,
+                Tableros = user.Tableros.Select(t => new TableroDto
+                {
+                    Id = t.Id,
+                    Titulo = t.Titulo,
+                    Descripcion = t.Descripcion
+                }).ToList()
             };
         }
 

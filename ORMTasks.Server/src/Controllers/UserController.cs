@@ -156,7 +156,7 @@ namespace ORM.Controllers
                 return Unauthorized();
             }
 
-            var userDto = await _userService.GetUserByIdAsnyc(userId); // Cambia el tipo aquí
+            var userDto = await _userService.GetUserByIdAsnyc(userId);
 
             if (userDto == null)
             {
