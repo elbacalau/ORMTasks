@@ -2,7 +2,11 @@
   <!-- Sidebar con ancho fijo -->
   <app-sidebar class="sidebar"></app-sidebar>
 
-  <h1>Bienvenido {{ userData!.nombre }}</h1>
+  @if (userData?.tableros?.length == 0) {
+    <app-first-entry></app-first-entry>
+  }
+
+
 
 </div>
 <router-outlet></router-outlet>
