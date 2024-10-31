@@ -1,3 +1,6 @@
+import { Tablero } from "./tablero.interface";
+
+
 export interface User {
   id:              number;
   nombre:          string;
@@ -9,4 +12,8 @@ export interface User {
   ciudad:          string;
   poblacion:       string;
   numeroTelefono:  string;
+  tableros: Tablero[];
 }
+
+
+
