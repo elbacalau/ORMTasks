@@ -34,8 +34,8 @@ namespace ORM.Controllers
         {
             try
             {
-                var tablero = await _tableroService.GetTablero(id);
-                return Ok(tablero);
+                var tableroDTO = await _tableroService.GetTablero(id);
+                return Ok(tableroDTO);
             }
             catch (KeyNotFoundException ex)
             {

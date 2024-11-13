@@ -4,37 +4,77 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ORM.Models;
+using ORMTasks.DTO;
 
 namespace ORMTasks.Server
 {
-    public class TablerService
+    public class TablerService(ORMDbContext context)
     {
-        private readonly ORMDbContext _context;
+        private readonly ORMDbContext _context = context;
 
-        // Constructor corregido
-        public TablerService(ORMDbContext context)
+        public async Task<List<TableroDto>> GetTableros()
         {
-            _context = context;
-        }
-
-        public async Task<List<Tablero>> GetTableros()
-        {
-
             if (!await _context.Tableros.AnyAsync())
             {
                 return [];
             }
 
-            return await _context.Tableros.ToListAsync();
+            
+            var tablerosDTO = await _context.Tableros
+                .Include(t => t.Usuario) 
+                .Select(tablero => new TableroDto
+                {
+                    Id = tablero.Id,
+                    Titulo = tablero.Titulo,
+                    Descripcion = tablero.Descripcion,
+                    FechaCreacion = tablero.CreatedAt,
+                    UserId = tablero.UserId,
+                    Propietario = tablero.Usuario != null ? new PropietarioTableroDto
+                    {
+                        Id = tablero.Usuario.Id,
+                        Nombre = tablero.Usuario.Nombre,
+                        Apellido = tablero.Usuario.Apellido,
+                        Email = tablero.Usuario.Email,
+                        Ciudad = tablero.Usuario.Ciudad,
+                        Poblacion = tablero.Usuario.Poblacion,
+                        NumeroTelefono = tablero.Usuario.NumeroTelefono,
+                    } : null
+                })
+                .ToListAsync();
+
+            return tablerosDTO;
         }
 
-        public async Task<Tablero> GetTablero(int id)
+
+        public async Task<TableroDto> GetTablero(int id)
         {
-            var tablero = await _context.Tableros.SingleOrDefaultAsync(t => t.Id == id)
-                ?? throw new KeyNotFoundException("No se ha encontrado el tablero");
+            var tablero = await _context.Tableros
+                .Include(u => u.Usuario)
+                .SingleOrDefaultAsync(t => t.Id == id)
+                ?? throw new KeyNotFoundException("Tablero no encontrado");
 
-            return tablero;
+            var tableroDTO = new TableroDto
+            {
+                Id = tablero.Id,
+                Titulo = tablero.Titulo,
+                Descripcion = tablero.Descripcion,
+                FechaCreacion = tablero.CreatedAt,
+                UserId = tablero.UserId,
+                Propietario = tablero.Usuario != null ? new PropietarioTableroDto
+                {
+                    Id = tablero.Usuario.Id,
+                    Nombre = tablero.Usuario.Nombre,
+                    Apellido = tablero.Usuario.Apellido,
+                    Email = tablero.Usuario.Email,
+                    Ciudad = tablero.Usuario.Ciudad,
+                    Poblacion = tablero.Usuario.Poblacion,
+                    NumeroTelefono = tablero.Usuario.NumeroTelefono,
+                } : null
+            };
+
+            return tableroDTO;
         }
+
 
         public async Task<Tablero> CrearTablero(int userId, string titulo, string descripcion)
         {
@@ -50,6 +90,7 @@ namespace ORMTasks.Server
                 UserId = userId,
                 Titulo = titulo,
                 Descripcion = descripcion
+
             };
 
 
