@@ -41,7 +41,7 @@ export class LoginComponentComponent {
 
         // '/dashboard'
         this.router.navigate(['/dashboard']);
-        console.log(token);
+
 
       },
       error: (error) => {

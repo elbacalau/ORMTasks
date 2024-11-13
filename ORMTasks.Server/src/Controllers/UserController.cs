@@ -91,7 +91,7 @@ namespace ORM.Controllers
 
 
         // crear usuario
-        [HttpPost("crear")]
+        [HttpPost("crearUsuario")]
         public IActionResult CrearUsuario([FromBody] CrearUsuarioRequest request)
         {
             if (request == null)

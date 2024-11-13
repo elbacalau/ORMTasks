@@ -2,6 +2,7 @@ import { Tablero } from 'src/app/interfaces/tablero.interface';
 
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { TableroService } from 'src/app/services/tablero_service/tablero.service';
+import { AuthService } from 'src/app/services/user_services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,10 +13,11 @@ import { TableroService } from 'src/app/services/tablero_service/tablero.service
 })
 export class SidebarComponent implements OnInit{
 
-  constructor(private tableroService: TableroService) { }
+  constructor(private tableroService: TableroService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getTableros();
+
   }
 
   listaTableros: Tablero[] = [];
@@ -38,5 +40,8 @@ export class SidebarComponent implements OnInit{
     });
   }
 
+  logout(): void {
+    this.authService.logout();
+  }
 
 }

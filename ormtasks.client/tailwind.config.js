@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,ts}"],
+  content: ["./src/**/*.{html,ts}"], // Se asegura de que Tailwind revise todos los archivos HTML y TS
   theme: {
     extend: {
       fontFamily: {
@@ -11,8 +11,12 @@ module.exports = {
       }
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+  plugins: [
+    require("@tailwindcss/typography"), // Mantén el plugin de tipografía
+    require("daisyui"), // Mantén el plugin de DaisyUI
+    require('@tailwindcss/line-clamp') // Agrega el plugin line-clamp
+  ],
   daisyui: {
-    themes: ["light", "dark", "cupcake", "pastel"],
+    themes: ["light", "dark", "cupcake", "pastel"], // Temas de DaisyUI
   },
 };

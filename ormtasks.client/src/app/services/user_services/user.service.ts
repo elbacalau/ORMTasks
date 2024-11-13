@@ -1,4 +1,3 @@
-// src/app/services/user.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'enviroment';
@@ -15,17 +14,10 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   loadUserData(): Observable<User> {
-    const storedUserData = localStorage.getItem('userData');
-    if (storedUserData) {
-      const parsedUserData = JSON.parse(storedUserData);
-      this.userDataSubject.next(parsedUserData);
-      return of(parsedUserData);
-    }
-
     return this.http.get<User>(`${this.baseUrl}/Users/profile`).pipe(
       tap((userData) => {
         this.userDataSubject.next(userData);
-        localStorage.setItem('userData', JSON.stringify(userData));
+        sessionStorage.setItem('userData', JSON.stringify(userData));
       })
     );
   }

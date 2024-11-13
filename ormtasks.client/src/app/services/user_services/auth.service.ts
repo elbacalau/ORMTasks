@@ -1,13 +1,13 @@
-// src/app/services/auth.service.ts
-import { UserService } from './user.service';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { environment } from 'enviroment';
 
-import { catchError, delay, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { LoginResponse } from 'src/app/interfaces/login.interface';
+import { UserService } from './user.service';
 import { User } from 'src/app/interfaces/user.interface';
+import { environment } from 'enviroment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,10 @@ import { User } from 'src/app/interfaces/user.interface';
 export class AuthService {
   private readonly baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient, private userService: UserService) {}
+  constructor(private http: HttpClient, private userService: UserService, private route: Router) {}
 
   createUser(formData: FormGroup): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/Users/crear`, formData.value).pipe(
-      delay(2000),
       catchError((error) => {
         console.error("Error al crear el usuario:", error);
         return throwError(() => error);
@@ -32,9 +31,7 @@ export class AuthService {
       .pipe(
         map(response => {
           localStorage.setItem('token', response.token);
-          // Cargar los datos del usuario y almacenar en localStorage
           this.userService.loadUserData().subscribe({
-            next: (userData) => localStorage.setItem('userData', JSON.stringify(userData)),
             error: (error) => console.error('Error al cargar datos del usuario:', error)
           });
           return response.token;
@@ -48,7 +45,9 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('userData'); // Opcional: Limpiar los datos del usuario al hacer logout
+    // redirect to home
+    this.route.navigate(['/']);
+    sessionStorage.clear();
   }
 
   isLoggedIn(): boolean {

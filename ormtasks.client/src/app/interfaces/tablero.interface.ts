@@ -3,3 +3,5 @@ export interface Tablero {
   titulo: string;
   descripcion: string;
 }
+
+
