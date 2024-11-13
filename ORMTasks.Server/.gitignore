@@ -1,1 +1,51 @@
-appsettings.json
+# Ignorar archivos de configuración y de entorno
+appsettings*.json
+*.env
+
+# Ignorar bin y obj
+bin/
+obj/
+
+# Ignorar archivos y directorios de VS Code y Visual Studio
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignorar archivos de configuración de paquetes y dependencias de Node.js
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+
+# Ignorar archivos de salida de compilación de .NET
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+*.csproj.user
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Ignorar directorio Properties si solo contiene configuración temporal
+Properties/
+
+# Ignorar archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos generados por Rider (IDE de JetBrains)
+.idea/
+.idea_modules/
+.idea/*
+
+# Ignorar directorios de paquetes de NuGet y otros caches
+**/packages/
+*.nupkg
+.nuget/
