@@ -1,6 +1,0 @@
-@ORMTasks.Server_HostAddress = http://localhost:5118
-
-GET {{ORMTasks.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
