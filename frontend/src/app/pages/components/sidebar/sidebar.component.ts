@@ -1,4 +1,4 @@
-import { Tablero } from 'src/app/interfaces/tablero.interface';
+import { Tablero, TableroUserData } from 'src/app/interfaces/tablero.interface';
 
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { TableroService } from 'src/app/services/tablero_service/tablero.service';
@@ -19,6 +19,10 @@ export class SidebarComponent implements OnInit{
   errorMessage = signal<string>("");
   constructor(private userService: UserService, private authService: AuthService) { }
 
+  get tableros(): TableroUserData[] {
+    return this.userData?.tableros ?? [];
+  }
+
   ngOnInit(): void {
     // cargamos el user data
     this.userService.loadUserData().subscribe({
@@ -26,11 +30,13 @@ export class SidebarComponent implements OnInit{
         this.userData = data;
       },
       error: (err) => {
-        if (this.userData?.tableros.length === 0) {
+
+
+        if (this.tableros.length === 0) {
           this.errorMessage.set("No tienes ningun tablero");
         }
 
-        this.errorMessage.set("Error al cargar los datos del usuario");
+        this.errorMessage.set("Error al cargar los datos del usuario:" + err);
       }
     });
     this.userService.userData$.subscribe((data) => {
